@@ -12,16 +12,16 @@ public class Run {
 
 	public static void main(String[] args) {
 		Client cli = new Client("toto", "tata", 1, 1);
-		cli.ajouterCompte(new CompteASeuil(1, 10, 1));
-		cli.ajouterCompte(new CompteRemunure(2, 1000, 0.02));
-		cli.ajouterCompte(new CompteASeuilRemunere(3, 1000, 0.02, 1));
-		verser(cli);
-		System.out.println(cli);
+		
 		try {
-			new CompteASeuil(4, 10, 2).retirer(30);
+			cli.ajouterCompte(new CompteRemunure(2, 1000, 0.02));
+			cli.ajouterCompte(new CompteASeuilRemunere(3, 1000, 0.02, 1));
+			cli.ajouterCompte(new CompteASeuil(1, 10, 1));
 		} catch (BanqueException e) {
 			e.printStackTrace();
 		}
+		verser(cli);
+		System.out.println(cli);
 	}
 	
 	private static void verser(Client cli) {
@@ -33,6 +33,12 @@ public class Run {
 	}
 	
 	private static void verserStream(Client cli) {
-		//cli.getComptes()
+		cli.getComptes().stream().filter((cmp)->{
+			return cmp instanceof ICompteRemunere;
+		}).map((cmp)->{
+			return ((ICompteRemunere) cmp);
+		}).forEach((cmp)->{
+			cmp.verserInterets();
+		});
 	}
 }

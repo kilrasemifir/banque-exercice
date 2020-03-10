@@ -1,12 +1,14 @@
 package com.aston.banque;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Client {
 
 	private String nom, prenom;
 	private int age, numero;
-	private Compte[] comptes = new Compte[5];
+	private List<Compte> comptes = new ArrayList<Compte>();
 	
 	public Client(String nom, String prenom, int age, int numero) {
 		super();
@@ -60,20 +62,18 @@ public class Client {
 
 
 
-	public Compte[] getComptes() {
+	public List<Compte> getComptes() {
 		return comptes;
 	}
 
 
 
-	public void ajouterCompte(Compte unCompte) {
-		for(int i = 0; i<5; i++) {
-			if (this.comptes[i] ==null) {
-				this.comptes[i] = unCompte;
-				return;
-			}
+	public void ajouterCompte(Compte unCompte) throws BanqueException {
+		if (this.comptes.size() < 5) {
+			this.comptes.add(unCompte);
+		}else {
+			throw new BanqueException("Vous ne pouvez pas avoir plus de 5 comptes");
 		}
-		System.err.println("Plus de place");
 	}
 	
 	public Compte getCompte(int numero) {
@@ -88,7 +88,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", numero=" + numero + ", comptes="
-				+ Arrays.toString(comptes) + "]";
+				+ comptes + "]";
 	}
 	
 	
