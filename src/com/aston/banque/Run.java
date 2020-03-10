@@ -25,13 +25,14 @@ public class Run {
 	}
 	
 	private static void verser(Client cli) {
-		for(Compte cmp : cli.getComptes()) {
+		for(Entry<Integer, Compte> entry : cli.getComptes().entrySet()) {
+			Compte cmp = entry.getValue();
 			if (cmp instanceof ICompteRemunere) {
 				((CompteRemunure) cmp).verserInterets();
 			}
 		}
 	}
-	
+	/*
 	private static void verserStream(Client cli) {
 		cli.getComptes().stream().filter((cmp)->{
 			return cmp instanceof ICompteRemunere;
@@ -40,5 +41,5 @@ public class Run {
 		}).forEach((cmp)->{
 			cmp.verserInterets();
 		});
-	}
+	}*/
 }
