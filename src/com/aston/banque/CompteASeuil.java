@@ -1,6 +1,6 @@
 package com.aston.banque;
 
-public class CompteASeuil extends Compte {
+public class CompteASeuil extends Compte implements ICompteASeuil {
 
 	private double seuil;
 	
@@ -24,7 +24,6 @@ public class CompteASeuil extends Compte {
 		if (this.getSolde()-unMontant > this.seuil) {
 			super.retirer(unMontant);
 		}
-		
 	}
 	
 	public String toString() {

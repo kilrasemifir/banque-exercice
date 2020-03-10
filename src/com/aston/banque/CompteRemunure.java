@@ -1,6 +1,6 @@
 package com.aston.banque;
 
-public class CompteRemunure extends Compte {
+public class CompteRemunure extends Compte implements ICompteRemunere {
 
 	private double taux;
 	public CompteRemunure(int numero, double solde, double taux) {
@@ -21,12 +21,12 @@ public class CompteRemunure extends Compte {
 			this.taux = taux;
 	}
 
-	public double calculerIntererts() {
+	public double calculerInterets() {
 		return this.taux * this.getSolde();
 	}
 	
 	public void verserInterets() {
-		this.ajouter(this.calculerIntererts());
+		this.ajouter(this.calculerInterets());
 	}
 	
 	public String toString() {

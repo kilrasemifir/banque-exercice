@@ -14,13 +14,14 @@ public class Run {
 		Client cli = new Client("toto", "tata", 1, 1);
 		cli.ajouterCompte(new CompteASeuil(1, 10, 1));
 		cli.ajouterCompte(new CompteRemunure(2, 1000, 0.02));
+		cli.ajouterCompte(new CompteASeuilRemunere(3, 1000, 0.02, 1));
 		verser(cli);
 		System.out.println(cli);
 	}
 	
 	private static void verser(Client cli) {
 		for(Compte cmp : cli.getComptes()) {
-			if (cmp instanceof CompteRemunure) {
+			if (cmp instanceof ICompteRemunere) {
 				((CompteRemunure) cmp).verserInterets();
 			}
 		}
