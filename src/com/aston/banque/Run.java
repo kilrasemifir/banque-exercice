@@ -11,31 +11,22 @@ import java.util.Set;
 public class Run {
 
 	public static void main(String[] args) {
-		System.out.println("Hello world");
-		int i = 4;
-		String[] array = new String[5];
-		array[0] = "Salut";
-		System.out.println(array[0]);
-		
-		List<String> list = new ArrayList<String>();
-		list.add("Salut list");
-		list.add("Salut list");
-		for (String string : list) {
-			System.out.println(string);
+		Client cli = new Client("toto", "tata", 1, 1);
+		cli.ajouterCompte(new CompteASeuil(1, 10, 1));
+		cli.ajouterCompte(new CompteRemunure(2, 1000, 0.02));
+		verser(cli);
+		System.out.println(cli);
+	}
+	
+	private static void verser(Client cli) {
+		for(Compte cmp : cli.getComptes()) {
+			if (cmp instanceof CompteRemunure) {
+				((CompteRemunure) cmp).verserInterets();
+			}
 		}
-		
-		Set<String> set = new HashSet<String>();
-		set.add("Salut set");
-		set.add("Salut set");
-		for (String string : set) {
-			System.out.println(string);
-		}
-		
-		Map<Integer, String> map = new HashMap<Integer, String>();
-		map.put(15, "salut!");
-		map.put(16,"bye!");
-		map.forEach((k,v)->{
-			System.out.println(""+k+":"+v);
-		});
+	}
+	
+	private static void verserStream(Client cli) {
+		//cli.getComptes()
 	}
 }
