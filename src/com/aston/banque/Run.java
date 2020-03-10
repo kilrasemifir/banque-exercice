@@ -17,6 +17,11 @@ public class Run {
 		cli.ajouterCompte(new CompteASeuilRemunere(3, 1000, 0.02, 1));
 		verser(cli);
 		System.out.println(cli);
+		try {
+			new CompteASeuil(4, 10, 2).retirer(30);
+		} catch (BanqueException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static void verser(Client cli) {

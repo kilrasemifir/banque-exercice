@@ -22,7 +22,7 @@ public class Compte {
 		this.solde += unMontant;
 	}
 	
-	public void retirer(double unMontant) {
+	public void retirer(double unMontant) throws BanqueException {
 		this.solde -= unMontant;
 	}
 	

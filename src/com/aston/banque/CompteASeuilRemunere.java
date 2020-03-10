@@ -20,9 +20,14 @@ public class CompteASeuilRemunere extends CompteRemunure implements ICompteASeui
 	}
 	
 	@Override
-	public void retirer(double unMontant) {
+	public void retirer(double unMontant) throws BanqueException{
 		if (this.getSolde()-unMontant > this.seuil) {
 			super.retirer(unMontant);
+		}else {
+			throw new BanqueException("Vous n'avez pas assez d'argent. "
+					+ "Votre solde:"+this.getSolde() 
+					+ "votre seuil:"+this.getSeuil() 
+					+" montant:"+unMontant);
 		}
 	}
 
